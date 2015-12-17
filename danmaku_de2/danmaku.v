@@ -226,6 +226,8 @@ wire pixel_fifo_clk;
 wire pixel_fifo_empty;
 
 wire pixel_clk_o;
+wire[3:0] i2c_drive_low;
+wire[2:0] unused;
 //=======================================================
 //  Structural coding
 //=======================================================
@@ -238,15 +240,14 @@ sys_pll sys_pll_1(
     locked
 );
 
-edid_process edid_process1(
-    .gclk(sys_clk),
-    .rst(sys_rst_n),
-    .slave_scl(ExpGPIO[32]),
-    .slave_sda(ExpGPIO[33]),
-    .master_scl(ExpGPIO[34]),
-    .master_sda(ExpGPIO[35]),
-    .edid_init(1'b0)
-);
+i2c_nios u0 (
+        .clk_clk       (sys_clk),       //   clk.clk
+        .reset_reset_n (sys_rst_n), // reset.reset_n
+		  .p_output_export({unused,ExpGPIO[25],i2c_drive_low}),
+        .p_input_export({4'bzzzz,ExpGPIO[35:32]}),    //  gpio.export
+        .edid_scl      (ExpGPIO[32]),
+        .edid_sda       (ExpGPIO[33])
+    );
 
 tfp401a dvi_in_1(
     .rst(sys_rst_n),
@@ -333,7 +334,12 @@ led led_pixclk(
 
 assign sys_rst_n = locked;
 
-assign ExpGPIO[25] = 1'b1; //hpd
+// assign ExpGPIO[32] = i2c_drive_low[0] ? 1'b0 : 1'bz;
+// assign ExpGPIO[33] = i2c_drive_low[1] ? 1'b0 : 1'bz;
+assign ExpGPIO[34] = i2c_drive_low[2] ? 1'b0 : 1'bz;
+assign ExpGPIO[35] = i2c_drive_low[3] ? 1'b0 : 1'bz;
+
+//assign ExpGPIO[25] = 1'b1; //hpd
 
 assign LEDG[2] = scdt_to_overlay;
 
@@ -346,8 +352,9 @@ assign VGA_CLK = ~pixel_clk_o;
 // assign VGA_G = pixel_g_to_overlay;
 // assign VGA_B = pixel_b_to_overlay;
 
-assign LEDR = SW;
-
+assign LEDR[3:0]=i2c_drive_low;
+assign LEDR[4]=ExpGPIO[25];
+assign LEDR[8:5]=ExpGPIO[35:32];
 //////////// FAN Control //////////
 assign FAN_CTRL = SW[17]; // turn off FAN
 
