@@ -80,12 +80,21 @@
 
 #include "stdio.h"
 #include "string.h"
+#include "unistd.h"
+#include "fcntl.h"
 
 #include "stdint_.h"
 #include "eeprom.h"
 #include "pin_def.h"
 
 enum{STATE_NO_SCR, STATE_EDID_READ, STATE_EDID_READY, STATE_CONNECTED};
+const char *STATE_TEXT[] = {
+		[STATE_NO_SCR] = "No Screen",
+		[STATE_EDID_READ] = "Reading EDID...",
+		[STATE_EDID_READY] = "EDID Ready",
+		[STATE_CONNECTED] = "Screen Connected"
+};
+
 
 void hackEDID(uint8_t buf[128])
 {
@@ -136,6 +145,7 @@ uint8_t verifyChecksum(uint8_t buf[128])
 
 uint8_t edid[128];
 int state = STATE_NO_SCR;
+int lcd_fd;
 
 void updateEDIDMemory()
 {
@@ -150,12 +160,18 @@ void switch_state(int newState)
 {
 	state = newState;
 	printf("new state %d\n", newState);
+	write(lcd_fd, "\x1b[1;1H\x1bK", 8);
+	write(lcd_fd, STATE_TEXT[newState], strlen(STATE_TEXT[newState]));
+
 }
 
 int main()
 { 
 	int ret;
 	alt_putstr("Hello from Nios II!\n");
+	lcd_fd = open(LCD_16207_0_NAME, O_WRONLY, 0);
+	printf("lcd=%d\n",lcd_fd);
+	write(lcd_fd, "hello\n", 6);
 
 	CLR_BITS(PIN_HPD);
 	switch_state(STATE_NO_SCR);

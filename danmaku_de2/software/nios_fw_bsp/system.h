@@ -4,7 +4,7 @@
  * Machine generated for CPU 'nios2_qsys_0' in SOPC Builder design 'i2c_nios'
  * SOPC Builder design path: E:/Projects/DE2iBasedDanmaku/danmaku_de2/i2c_nios.sopcinfo
  *
- * Generated: Thu Dec 17 17:22:09 CST 2015
+ * Generated: Thu Dec 17 23:12:04 CST 2015
  */
 
 /*
@@ -138,6 +138,7 @@
  */
 
 #define __ALTERA_AVALON_JTAG_UART
+#define __ALTERA_AVALON_LCD_16207
 #define __ALTERA_AVALON_ONCHIP_MEMORY2
 #define __ALTERA_AVALON_PIO
 #define __ALTERA_AVALON_SYSID_QSYS
@@ -222,6 +223,20 @@
 #define JTAG_UART_0_TYPE "altera_avalon_jtag_uart"
 #define JTAG_UART_0_WRITE_DEPTH 64
 #define JTAG_UART_0_WRITE_THRESHOLD 8
+
+
+/*
+ * lcd_16207_0 configuration
+ *
+ */
+
+#define ALT_MODULE_CLASS_lcd_16207_0 altera_avalon_lcd_16207
+#define LCD_16207_0_BASE 0x1006000
+#define LCD_16207_0_IRQ -1
+#define LCD_16207_0_IRQ_INTERRUPT_CONTROLLER_ID -1
+#define LCD_16207_0_NAME "/dev/lcd_16207_0"
+#define LCD_16207_0_SPAN 16
+#define LCD_16207_0_TYPE "altera_avalon_lcd_16207"
 
 
 /*
@@ -319,7 +334,7 @@
 #define SYSID_QSYS_0_IRQ_INTERRUPT_CONTROLLER_ID -1
 #define SYSID_QSYS_0_NAME "/dev/sysid_qsys_0"
 #define SYSID_QSYS_0_SPAN 8
-#define SYSID_QSYS_0_TIMESTAMP 1450341934
+#define SYSID_QSYS_0_TIMESTAMP 1450364133
 #define SYSID_QSYS_0_TYPE "altera_avalon_sysid_qsys"
 
 

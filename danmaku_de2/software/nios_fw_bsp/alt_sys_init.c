@@ -4,7 +4,7 @@
  * Machine generated for CPU 'nios2_qsys_0' in SOPC Builder design 'i2c_nios'
  * SOPC Builder design path: E:/Projects/DE2iBasedDanmaku/danmaku_de2/i2c_nios.sopcinfo
  *
- * Generated: Thu Dec 17 11:34:33 CST 2015
+ * Generated: Thu Dec 17 23:12:04 CST 2015
  */
 
 /*
@@ -60,6 +60,7 @@
 
 #include "altera_nios2_gen2_irq.h"
 #include "altera_avalon_jtag_uart.h"
+#include "altera_avalon_lcd_16207.h"
 #include "altera_avalon_sysid_qsys.h"
 #include "altera_avalon_timer.h"
 
@@ -69,6 +70,7 @@
 
 ALTERA_NIOS2_GEN2_IRQ_INSTANCE ( NIOS2_QSYS_0, nios2_qsys_0);
 ALTERA_AVALON_JTAG_UART_INSTANCE ( JTAG_UART_0, jtag_uart_0);
+ALTERA_AVALON_LCD_16207_INSTANCE ( LCD_16207_0, lcd_16207_0);
 ALTERA_AVALON_SYSID_QSYS_INSTANCE ( SYSID_QSYS_0, sysid_qsys_0);
 ALTERA_AVALON_TIMER_INSTANCE ( TIMER_0, timer_0);
 
@@ -95,5 +97,6 @@ void alt_sys_init( void )
 {
     ALTERA_AVALON_TIMER_INIT ( TIMER_0, timer_0);
     ALTERA_AVALON_JTAG_UART_INIT ( JTAG_UART_0, jtag_uart_0);
+    ALTERA_AVALON_LCD_16207_INIT ( LCD_16207_0, lcd_16207_0);
     ALTERA_AVALON_SYSID_QSYS_INIT ( SYSID_QSYS_0, sysid_qsys_0);
 }

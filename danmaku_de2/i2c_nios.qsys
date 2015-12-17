@@ -57,6 +57,22 @@
          type = "String";
       }
    }
+   element lcd_16207_0
+   {
+      datum _sortIndex
+      {
+         value = "9";
+         type = "int";
+      }
+   }
+   element lcd_16207_0.control_slave
+   {
+      datum baseAddress
+      {
+         value = "16801792";
+         type = "String";
+      }
+   }
    element nios2_qsys_0
    {
       datum _sortIndex
@@ -164,6 +180,7 @@
    internal="avalon_slave_edid_0.user_interface"
    type="conduit"
    dir="end" />
+ <interface name="lcd" internal="lcd_16207_0.external" type="conduit" dir="end" />
  <interface
    name="p_input"
    internal="pio_in.external_connection"
@@ -210,6 +227,11 @@
   <parameter name="writeIRQThreshold" value="8" />
  </module>
  <module
+   name="lcd_16207_0"
+   kind="altera_avalon_lcd_16207"
+   version="15.0"
+   enabled="1" />
+ <module
    name="nios2_qsys_0"
    kind="altera_nios2_gen2"
    version="15.0"
@@ -233,7 +255,7 @@
   <parameter name="dataAddrWidth" value="28" />
   <parameter name="dataMasterHighPerformanceAddrWidth" value="1" />
   <parameter name="dataMasterHighPerformanceMapParam" value="" />
-  <parameter name="dataSlaveMapParam"><![CDATA[<address-map><slave name='onchip_memory2_0.s1' start='0x0' end='0x10000' /><slave name='pio_in.s1' start='0x1000000' end='0x1000010' /><slave name='sysid_qsys_0.control_slave' start='0x1001000' end='0x1001008' /><slave name='jtag_uart_0.avalon_jtag_slave' start='0x1002000' end='0x1002008' /><slave name='timer_0.s1' start='0x1003000' end='0x1003020' /><slave name='pio_out.s1' start='0x1004000' end='0x1004010' /><slave name='avalon_slave_edid_0.s0' start='0x1005000' end='0x1005100' /><slave name='nios2_qsys_0.debug_mem_slave' start='0x8000000' end='0x8000800' /></address-map>]]></parameter>
+  <parameter name="dataSlaveMapParam"><![CDATA[<address-map><slave name='onchip_memory2_0.s1' start='0x0' end='0x10000' /><slave name='pio_in.s1' start='0x1000000' end='0x1000010' /><slave name='sysid_qsys_0.control_slave' start='0x1001000' end='0x1001008' /><slave name='jtag_uart_0.avalon_jtag_slave' start='0x1002000' end='0x1002008' /><slave name='timer_0.s1' start='0x1003000' end='0x1003020' /><slave name='pio_out.s1' start='0x1004000' end='0x1004010' /><slave name='avalon_slave_edid_0.s0' start='0x1005000' end='0x1005100' /><slave name='lcd_16207_0.control_slave' start='0x1006000' end='0x1006010' /><slave name='nios2_qsys_0.debug_mem_slave' start='0x8000000' end='0x8000800' /></address-map>]]></parameter>
   <parameter name="data_master_high_performance_paddr_base" value="0" />
   <parameter name="data_master_high_performance_paddr_size" value="0" />
   <parameter name="data_master_paddr_base" value="0" />
@@ -488,6 +510,15 @@
    kind="avalon"
    version="15.0"
    start="nios2_qsys_0.data_master"
+   end="lcd_16207_0.control_slave">
+  <parameter name="arbitrationPriority" value="1" />
+  <parameter name="baseAddress" value="0x01006000" />
+  <parameter name="defaultConnection" value="false" />
+ </connection>
+ <connection
+   kind="avalon"
+   version="15.0"
+   start="nios2_qsys_0.data_master"
    end="nios2_qsys_0.debug_mem_slave">
   <parameter name="arbitrationPriority" value="1" />
   <parameter name="baseAddress" value="0x08000000" />
@@ -562,6 +593,7 @@
  <connection kind="clock" version="15.0" start="clk_0.clk" end="jtag_uart_0.clk" />
  <connection kind="clock" version="15.0" start="clk_0.clk" end="timer_0.clk" />
  <connection kind="clock" version="15.0" start="clk_0.clk" end="pio_out.clk" />
+ <connection kind="clock" version="15.0" start="clk_0.clk" end="lcd_16207_0.clk" />
  <connection
    kind="clock"
    version="15.0"
@@ -628,6 +660,11 @@
    version="15.0"
    start="clk_0.clk_reset"
    end="pio_out.reset" />
+ <connection
+   kind="reset"
+   version="15.0"
+   start="clk_0.clk_reset"
+   end="lcd_16207_0.reset" />
  <connection
    kind="reset"
    version="15.0"

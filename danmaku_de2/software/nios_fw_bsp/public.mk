@@ -84,6 +84,10 @@ ACDS_VERSION := 15.0
 # used to generate this makefile. 
 # BUILD_NUMBER: 145
 
+# Quartus Generated JDI File. Required for resolving node instance ID's with 
+# design component names. 
+JDI_FILE := E:/Projects/DE2iBasedDanmaku/danmaku_de2/danmaku.jdi
+
 # Qsys--generated SOPCINFO file. Required for resolving node instance ID's with 
 # design component names. 
 SOPCINFO_FILE := E:/Projects/DE2iBasedDanmaku/danmaku_de2/i2c_nios.sopcinfo
@@ -157,9 +161,9 @@ SOPC_SYSID_FLAG += --sidp=0x1001000
 ELF_PATCH_FLAG  += --sidp 0x1001000
 
 # The SOPC Timestamp 
-# setting SOPC_TIMESTAMP is 1450341934
-SOPC_SYSID_FLAG += --timestamp=1450341934
-ELF_PATCH_FLAG  += --timestamp 1450341934
+# setting SOPC_TIMESTAMP is 1450364133
+SOPC_SYSID_FLAG += --timestamp=1450364133
+ELF_PATCH_FLAG  += --timestamp 1450364133
 
 # Enable JTAG UART driver to recover when host is inactive causing buffer to 
 # full without returning error. Printf will not fail with this recovery. none 

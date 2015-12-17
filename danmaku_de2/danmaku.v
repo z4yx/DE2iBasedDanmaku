@@ -246,7 +246,11 @@ i2c_nios u0 (
 		  .p_output_export({unused,ExpGPIO[25],i2c_drive_low}),
         .p_input_export({4'bzzzz,ExpGPIO[35:32]}),    //  gpio.export
         .edid_scl      (ExpGPIO[32]),
-        .edid_sda       (ExpGPIO[33])
+        .edid_sda       (ExpGPIO[33]),
+		  .lcd_data       (LCD_DATA),
+		  .lcd_E         (LCD_EN),
+		  .lcd_RS         (LCD_RS),
+		  .lcd_RW         (LCD_RW)
     );
 
 tfp401a dvi_in_1(
@@ -357,5 +361,7 @@ assign LEDR[4]=ExpGPIO[25];
 assign LEDR[8:5]=ExpGPIO[35:32];
 //////////// FAN Control //////////
 assign FAN_CTRL = SW[17]; // turn off FAN
+
+assign LCD_ON = 1'b1;
 
 endmodule
