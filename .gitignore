@@ -1,0 +1,11 @@
+db
+incremental_db
+*.rpt
+*.summary
+*.smsg
+*.bak
+*.done
+*.sof
+*.pin
+*.map
+*.jic

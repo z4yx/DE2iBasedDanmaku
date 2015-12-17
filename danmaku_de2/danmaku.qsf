@@ -6,7 +6,7 @@ set_global_assignment -name FAMILY "Cyclone IV GX"
 set_global_assignment -name DEVICE EP4CGX150DF31C7
 set_global_assignment -name TOP_LEVEL_ENTITY "danmaku"
 set_global_assignment -name ORIGINAL_QUARTUS_VERSION 12.0
-set_global_assignment -name LAST_QUARTUS_VERSION 12.1
+set_global_assignment -name LAST_QUARTUS_VERSION 13.1
 set_global_assignment -name PROJECT_CREATION_TIME_DATE "10:39:56 OCTOBER 01,2015"
 set_global_assignment -name DEVICE_FILTER_PACKAGE FBGA
 set_global_assignment -name DEVICE_FILTER_PIN_COUNT 896
