@@ -42,7 +42,9 @@ module danmaku_overlay(
   output wire [31:0] nowPxl,
   
   output wire ovf,
-  output wire syncWaitV
+  output wire syncWaitV,
+  
+  input wire overlay_en
 
 );
 
@@ -64,8 +66,8 @@ wire ovf;
 assign pixel_clk_o=odck_in;
 assign fifoRdclk = odck_in;
 assign syncWait = syncWaitH || syncWaitV;
-assign {pixel_r_o, pixel_g_o, pixel_b_o} = (fifoData_in[7]==1'b0 || syncWait)? 
-                                           {(fifoRdEmpty && !noDebug)? 8'h00 : pixel_r_orig, pixel_g_orig, (syncWait && !noDebug) ? 8'h00 :  pixel_b_orig}:
+assign {pixel_r_o, pixel_g_o, pixel_b_o} = (fifoData_in[7]==1'b0 || syncWait || !overlay_en)? 
+                                           {(fifoRdEmpty && !noDebug)? ~pixel_r_orig : pixel_r_orig, pixel_g_orig, (syncWait && !noDebug) ? ~pixel_b_orig :  pixel_b_orig}:
                                            fifoData_in[31:8];
 
 assign syncWaitH = fifoData_in[1:0] == 2'h01;

@@ -1,3 +1,11 @@
-danmaku_de2/i2c_nios/synthesis/
-*.cdf
-*.jdi
+db
+incremental_db
+*.rpt
+*.summary
+*.smsg
+*.bak
+*.done
+*.sof
+*.pin
+*.map
+*.jic

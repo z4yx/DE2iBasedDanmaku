@@ -26,8 +26,8 @@ output wire[7:0] pixel_b_o
 );
 
 assign odck_o = odck_in;
-assign vsync_o = ~vsync_in;
-assign hsync_o = ~hsync_in;
+assign vsync_o = vsync_in;
+assign hsync_o = hsync_in;
 assign de_o = de_in;
 assign pixel_b_o = pixel_b_in;
 assign pixel_r_o = pixel_r_in;

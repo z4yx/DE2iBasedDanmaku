@@ -68,36 +68,28 @@ always @(posedge odck or negedge rst) begin
     screenPxl <= 0;
     lastDe <= 0;
   end else begin
+  
+    lastVsync <= vsync;
+    lastDe <= de;
     //for X counting
     if(de) begin
       nowX <= nowX + 1;
-      if (nowX == 'd65535) begin
-        thisOvfX <= 1;
-      end
     end else begin
       if(lastDe)begin
         screenX <= nowX;
-        ovfX <= thisOvfX;
       end
       nowX <= 0;
-      thisOvfX <= 0;
     end
     
     //for Y counting
     
-    if(de == 0) begin
-      if(lastDe == 1)begin
+    if(!de) begin
+      if(lastDe)begin
         nowY <= nowY + 1;
-        if (nowY == 'd65535) begin
-          thisOvfY <= 1;
-        end
-      end
-      if(vsync == 0) begin
-        if(lastVsync == 1) begin
+      end else if(!vsync) begin
+        if(lastVsync) begin
           screenY  <= nowY;
-          ovfY <= thisOvfY;
         end
-        thisOvfY <= 0;
         nowY <= 0;
       end 
     end
@@ -107,17 +99,13 @@ always @(posedge odck or negedge rst) begin
     if(de) begin 
       nowPxl <= nowPxl + 1;
     end else begin
-      if(vsync == 0) begin
-        if(lastVsync == 1) begin
+      if(!vsync) begin
+        if(lastVsync) begin
           screenPxl <= nowPxl;
         end
         nowPxl <= 0;
       end
     end
-    
-    
-    lastVsync <= vsync;
-    lastDe <= de;
   end
 
 end
