@@ -553,6 +553,11 @@ wire pixel_clk_o;
 assign pixel_fifo_data = SW[4] ? pixel_fifo_data_int : pixel_fifo_data_ext;
 assign pixel_fifo_empty = SW[4] ? pixel_fifo_empty_int : pixel_fifo_empty_ext;
 
+wire[3:0] i2c_drive_low;
+wire[2:0] unused;
+
+assign GPIO[34] = i2c_drive_low[2] ? 1'b0 : 1'bz; //I2C master
+assign GPIO[35] = i2c_drive_low[3] ? 1'b0 : 1'bz; //I2C master
 //=======================================================
 //  Structural coding
 //=======================================================
@@ -565,15 +570,15 @@ sys_pll sys_pll_1(
     locked
 );
 
-edid_process edid_process1(
-    .gclk(sys_clk),
-    .rst(sys_rst_n),
-    .slave_scl(GPIO[32]),
-    .slave_sda(GPIO[33]),
-    .master_scl(GPIO[34]),
-    .master_sda(GPIO[35]),
-    .edid_init(1'b0)
-);
+i2c_nios i2c_nios0 (
+        .clk_clk       (sys_clk),       //   clk.clk
+        .reset_reset_n (sys_rst_n), // reset.reset_n
+		  .p_output_export({unused,GPIO[25],i2c_drive_low}),
+        .p_input_export({4'bzzzz,GPIO[35:32]}),    //  gpio.export
+        .edid_scl      (GPIO[32]),
+        .edid_sda       (GPIO[33])
+    );
+
 
 tfp401a dvi_in_1(
     .rst(sys_rst_n),
@@ -667,7 +672,7 @@ led led_pixclk(
 
 assign sys_rst_n = locked;
 
-assign GPIO[25] = 1'b1; //hpd
+//assign GPIO[25] = 1'b1; //hpd
 
 assign LEDG[6] = scdt_to_overlay;
 

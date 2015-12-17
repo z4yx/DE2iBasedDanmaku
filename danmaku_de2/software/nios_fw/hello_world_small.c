@@ -184,7 +184,7 @@ int main()
 			break;
 		case STATE_EDID_READY:
 			CLR_BITS(PIN_HPD);
-			usleep(10000);
+			usleep(1000000);
 			updateEDIDMemory();
 			printf("EDID updated\n");
 			SET_BITS(PIN_HPD);

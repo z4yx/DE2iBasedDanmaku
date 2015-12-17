@@ -1112,7 +1112,7 @@ set_global_assignment -name PARTITION_NETLIST_TYPE SOURCE -section_id Top
 set_global_assignment -name PARTITION_FITTER_PRESERVATION_LEVEL PLACEMENT_AND_ROUTING -section_id Top
 set_global_assignment -name PARTITION_COLOR 16764057 -section_id Top
 set_global_assignment -name STRATIX_DEVICE_IO_STANDARD "2.5 V"
-set_global_assignment -name LAST_QUARTUS_VERSION 15.1.0
+set_global_assignment -name LAST_QUARTUS_VERSION 15.0.0
 set_global_assignment -name PHYSICAL_SYNTHESIS_COMBO_LOGIC ON
 set_global_assignment -name PHYSICAL_SYNTHESIS_REGISTER_RETIMING ON
 set_global_assignment -name PHYSICAL_SYNTHESIS_ASYNCHRONOUS_SIGNAL_PIPELINING ON
@@ -1135,37 +1135,8 @@ set_global_assignment -name MIN_CORE_JUNCTION_TEMP 0
 set_global_assignment -name MAX_CORE_JUNCTION_TEMP 85
 set_global_assignment -name POWER_PRESET_COOLING_SOLUTION "23 MM HEAT SINK WITH 200 LFPM AIRFLOW"
 set_global_assignment -name POWER_BOARD_THERMAL_MODEL "NONE (CONSERVATIVE)"
-set_global_assignment -name VERILOG_FILE danmaku_de2/dvi_input/tfp401a.v
-set_global_assignment -name VERILOG_FILE danmaku_de2/dvi_output/tfp410.v
-set_global_assignment -name VERILOG_FILE danmaku_de2/global_ctl/sysctl.v
-set_global_assignment -name VERILOG_FILE danmaku_de2/global_ctl/sys_pll.v
-set_global_assignment -name QIP_FILE danmaku_de2/global_ctl/sys_pll.qip
-set_global_assignment -name VERILOG_FILE danmaku_de2/global_ctl/led.v
-set_global_assignment -name QIP_FILE danmaku_de2/global_ctl/fifo_32to32.qip
-set_global_assignment -name VERILOG_FILE danmaku_de2/global_ctl/edid_process.v
-set_global_assignment -name VERILOG_FILE danmaku_de2/global_ctl/edid_mem.v
-set_global_assignment -name QIP_FILE danmaku_de2/global_ctl/edid_mem.qip
-set_global_assignment -name VERILOG_FILE danmaku_de2/i2c/i2c_slave.v
-set_global_assignment -name VERILOG_FILE danmaku_de2/i2c/i2c_master.v
-set_global_assignment -name VERILOG_FILE danmaku_de2/image_generator/vga.v
-set_global_assignment -name VERILOG_FILE danmaku_de2/image_generator/test_img_feeder.v
-set_global_assignment -name VERILOG_FILE danmaku_de2/image_generator/simple.v
-set_global_assignment -name VERILOG_FILE danmaku_de2/image_generator/image.v
-set_global_assignment -name VERILOG_FILE danmaku_de2/image_generator/fifo_32to32.v
-set_global_assignment -name QIP_FILE danmaku_de2/image_generator/fifo_32to32.qip
-set_global_assignment -name VERILOG_FILE danmaku_de2/image_generator/feeder_pll.v
-set_global_assignment -name QIP_FILE danmaku_de2/image_generator/feeder_pll.qip
-set_global_assignment -name VERILOG_FILE danmaku_de2/overlay_logic/syncCorrector.v
-set_global_assignment -name VERILOG_FILE danmaku_de2/overlay_logic/pxlCount.v
-set_global_assignment -name VERILOG_FILE danmaku_de2/overlay_logic/danmaku_overlay.v
-set_global_assignment -name VERILOG_FILE SEG7_LUT.v
-set_global_assignment -name VERILOG_FILE endless_reader.v
-set_global_assignment -name QIP_FILE de2i_150_qsys/synthesis/de2i_150_qsys.qip
-set_global_assignment -name SDC_FILE de2i_150_qsys_pcie.sdc
-set_global_assignment -name QIP_FILE fifo.qip
 set_global_assignment -name ENABLE_SIGNALTAP ON
 set_global_assignment -name USE_SIGNALTAP_FILE stp2.stp
-set_global_assignment -name SIGNALTAP_FILE stp2.stp
 set_global_assignment -name SLD_NODE_CREATOR_ID 110 -section_id auto_signaltap_0
 set_global_assignment -name SLD_NODE_ENTITY_NAME sld_signaltap -section_id auto_signaltap_0
 set_instance_assignment -name CONNECT_TO_SLD_NODE_ENTITY_PORT acq_clk -to "tfp401a:dvi_in_1|odck_in" -section_id auto_signaltap_0
@@ -1275,5 +1246,36 @@ set_global_assignment -name SLD_NODE_PARAMETER_ASSIGNMENT "SLD_TRIGGER_BITS=12" 
 set_instance_assignment -name POST_FIT_CONNECT_TO_SLD_NODE_ENTITY_PORT crc[7] -to auto_signaltap_0|gnd -section_id auto_signaltap_0
 set_instance_assignment -name POST_FIT_CONNECT_TO_SLD_NODE_ENTITY_PORT crc[18] -to auto_signaltap_0|gnd -section_id auto_signaltap_0
 set_global_assignment -name SLD_NODE_PARAMETER_ASSIGNMENT "SLD_ADVANCED_TRIGGER_ENTITY=sld_reserved_de2i_150_qsys_pcie_auto_signaltap_0_1_f8df," -section_id auto_signaltap_0
-set_global_assignment -name SLD_FILE db/stp2_auto_stripped.stp
+set_global_assignment -name IP_SEARCH_PATHS "e:\\projects\\de2ibaseddanmaku\\danmaku_de2"
+set_global_assignment -name SEARCH_PATH "e:\\projects\\de2ibaseddanmaku\\danmaku_de2"
+set_global_assignment -name QIP_FILE danmaku_de2/i2c_nios/synthesis/i2c_nios.qip
+set_global_assignment -name VERILOG_FILE danmaku_de2/dvi_input/tfp401a.v
+set_global_assignment -name VERILOG_FILE danmaku_de2/dvi_output/tfp410.v
+set_global_assignment -name VERILOG_FILE danmaku_de2/global_ctl/sysctl.v
+set_global_assignment -name VERILOG_FILE danmaku_de2/global_ctl/sys_pll.v
+set_global_assignment -name QIP_FILE danmaku_de2/global_ctl/sys_pll.qip
+set_global_assignment -name VERILOG_FILE danmaku_de2/global_ctl/led.v
+set_global_assignment -name QIP_FILE danmaku_de2/global_ctl/fifo_32to32.qip
+set_global_assignment -name VERILOG_FILE danmaku_de2/global_ctl/edid_process.v
+set_global_assignment -name VERILOG_FILE danmaku_de2/global_ctl/edid_mem.v
+set_global_assignment -name QIP_FILE danmaku_de2/global_ctl/edid_mem.qip
+set_global_assignment -name VERILOG_FILE danmaku_de2/i2c/i2c_slave.v
+set_global_assignment -name VERILOG_FILE danmaku_de2/i2c/i2c_master.v
+set_global_assignment -name VERILOG_FILE danmaku_de2/image_generator/vga.v
+set_global_assignment -name VERILOG_FILE danmaku_de2/image_generator/test_img_feeder.v
+set_global_assignment -name VERILOG_FILE danmaku_de2/image_generator/simple.v
+set_global_assignment -name VERILOG_FILE danmaku_de2/image_generator/image.v
+set_global_assignment -name VERILOG_FILE danmaku_de2/image_generator/fifo_32to32.v
+set_global_assignment -name QIP_FILE danmaku_de2/image_generator/fifo_32to32.qip
+set_global_assignment -name VERILOG_FILE danmaku_de2/image_generator/feeder_pll.v
+set_global_assignment -name QIP_FILE danmaku_de2/image_generator/feeder_pll.qip
+set_global_assignment -name VERILOG_FILE danmaku_de2/overlay_logic/syncCorrector.v
+set_global_assignment -name VERILOG_FILE danmaku_de2/overlay_logic/pxlCount.v
+set_global_assignment -name VERILOG_FILE danmaku_de2/overlay_logic/danmaku_overlay.v
+set_global_assignment -name VERILOG_FILE SEG7_LUT.v
+set_global_assignment -name VERILOG_FILE endless_reader.v
+set_global_assignment -name QIP_FILE de2i_150_qsys/synthesis/de2i_150_qsys.qip
+set_global_assignment -name SDC_FILE de2i_150_qsys_pcie.sdc
+set_global_assignment -name SIGNALTAP_FILE stp2.stp
 set_instance_assignment -name PARTITION_HIERARCHY root_partition -to | -section_id Top
+set_global_assignment -name SLD_FILE db/stp2_auto_stripped.stp

@@ -2,8 +2,8 @@
 <sch:Settings xmlns:sch="http://www.altera.com/embeddedsw/bsp/schema">
         <BspType>hal</BspType>
         <BspVersion>default</BspVersion>
-        <BspGeneratedTimeStamp>2015-12-17 15:49:19</BspGeneratedTimeStamp>
-        <BspGeneratedUnixTimeStamp>1450338559815</BspGeneratedUnixTimeStamp>
+        <BspGeneratedTimeStamp>2015-12-17 17:22:08</BspGeneratedTimeStamp>
+        <BspGeneratedUnixTimeStamp>1450344128917</BspGeneratedUnixTimeStamp>
         <BspGeneratedLocation>E:\Projects\DE2iBasedDanmaku\danmaku_de2\software\nios_fw_bsp</BspGeneratedLocation>
         <BspSettingsFile>settings.bsp</BspSettingsFile>
         <SopcDesignFile>E:\Projects\DE2iBasedDanmaku\danmaku_de2\i2c_nios.sopcinfo</SopcDesignFile>

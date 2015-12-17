@@ -4,7 +4,7 @@
  * Machine generated for CPU 'nios2_qsys_0' in SOPC Builder design 'i2c_nios'
  * SOPC Builder design path: E:/Projects/DE2iBasedDanmaku/danmaku_de2/i2c_nios.sopcinfo
  *
- * Generated: Thu Dec 17 15:41:56 CST 2015
+ * Generated: Thu Dec 17 17:22:09 CST 2015
  */
 
 /*
@@ -319,7 +319,7 @@
 #define SYSID_QSYS_0_IRQ_INTERRUPT_CONTROLLER_ID -1
 #define SYSID_QSYS_0_NAME "/dev/sysid_qsys_0"
 #define SYSID_QSYS_0_SPAN 8
-#define SYSID_QSYS_0_TIMESTAMP 1450337276
+#define SYSID_QSYS_0_TIMESTAMP 1450341934
 #define SYSID_QSYS_0_TYPE "altera_avalon_sysid_qsys"
 
 
