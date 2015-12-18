@@ -508,7 +508,7 @@ endless_reader reader(
   
 );
 
-assign FAN_CTRL = 1'b0;
+assign FAN_CTRL = SW[17];
 
 
 //assign LEDR[17:0] = reader_length_left[17:0];
@@ -576,7 +576,11 @@ i2c_nios i2c_nios0 (
 		  .p_output_export({unused,GPIO[25],i2c_drive_low}),
         .p_input_export({4'bzzzz,GPIO[35:32]}),    //  gpio.export
         .edid_scl      (GPIO[32]),
-        .edid_sda       (GPIO[33])
+        .edid_sda       (GPIO[33]),
+		  .lcd_data       (LCD_DATA),
+		  .lcd_E         (LCD_EN),
+		  .lcd_RS         (LCD_RS),
+		  .lcd_RW         (LCD_RW)
     );
 
 
@@ -684,6 +688,8 @@ assign VGA_CLK = ~pixel_clk_o;
 // assign VGA_R = pixel_r_to_overlay;
 // assign VGA_G = pixel_g_to_overlay;
 // assign VGA_B = pixel_b_to_overlay;
+
+assign LCD_ON = 1'b1;
 
 
 //===========================
