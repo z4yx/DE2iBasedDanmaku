@@ -4,7 +4,7 @@
  * Machine generated for CPU 'nios2_qsys_0' in SOPC Builder design 'i2c_nios'
  * SOPC Builder design path: E:/Projects/DE2iBasedDanmaku/danmaku_de2/i2c_nios.sopcinfo
  *
- * Generated: Thu Dec 17 23:12:04 CST 2015
+ * Generated: Fri Dec 18 23:41:15 CST 2015
  */
 
 /*
@@ -245,15 +245,15 @@
  */
 
 #define ALT_MODULE_CLASS_onchip_memory2_0 altera_avalon_onchip_memory2
-#define ONCHIP_MEMORY2_0_ALLOW_IN_SYSTEM_MEMORY_CONTENT_EDITOR 0
+#define ONCHIP_MEMORY2_0_ALLOW_IN_SYSTEM_MEMORY_CONTENT_EDITOR 1
 #define ONCHIP_MEMORY2_0_ALLOW_MRAM_SIM_CONTENTS_ONLY_FILE 0
 #define ONCHIP_MEMORY2_0_BASE 0x0
 #define ONCHIP_MEMORY2_0_CONTENTS_INFO ""
 #define ONCHIP_MEMORY2_0_DUAL_PORT 0
 #define ONCHIP_MEMORY2_0_GUI_RAM_BLOCK_TYPE "AUTO"
 #define ONCHIP_MEMORY2_0_INIT_CONTENTS_FILE "i2c_nios_onchip_memory2_0"
-#define ONCHIP_MEMORY2_0_INIT_MEM_CONTENT 0
-#define ONCHIP_MEMORY2_0_INSTANCE_ID "NONE"
+#define ONCHIP_MEMORY2_0_INIT_MEM_CONTENT 1
+#define ONCHIP_MEMORY2_0_INSTANCE_ID "NIOS"
 #define ONCHIP_MEMORY2_0_IRQ -1
 #define ONCHIP_MEMORY2_0_IRQ_INTERRUPT_CONTROLLER_ID -1
 #define ONCHIP_MEMORY2_0_NAME "/dev/onchip_memory2_0"
@@ -334,7 +334,7 @@
 #define SYSID_QSYS_0_IRQ_INTERRUPT_CONTROLLER_ID -1
 #define SYSID_QSYS_0_NAME "/dev/sysid_qsys_0"
 #define SYSID_QSYS_0_SPAN 8
-#define SYSID_QSYS_0_TIMESTAMP 1450364133
+#define SYSID_QSYS_0_TIMESTAMP 1450450071
 #define SYSID_QSYS_0_TYPE "altera_avalon_sysid_qsys"
 
 

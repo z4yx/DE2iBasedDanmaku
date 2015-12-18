@@ -11,3 +11,10 @@ incremental_db
 *.jic
 danmaku_de2/i2c_nios/synthesis/
 *.sopcinfo
+*.flash
+*.hex
+*.pof
+*.jdi
+*.cdf
+*.qws
+.qsys_edit/

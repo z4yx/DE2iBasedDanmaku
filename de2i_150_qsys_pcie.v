@@ -31,6 +31,7 @@
 //Date:  Wed Jun 27 19:19:53 2012
 // ============================================================================
 
+`default_nettype none
 `define ENABLE_PCIE
 
 module de2i_150_qsys_pcie(
@@ -413,7 +414,7 @@ wire [31:0] pxl_width;
 wire [31:0] pxl_height;
 wire chip_sel;
 
-
+wire[3:0] pcie_led;
 
 
 //=======================================================
@@ -430,7 +431,7 @@ assign reset_n = 1'b1;
         .pcie_ip_pcie_rstn_export                   (PCIE_PERST_N),                   //          pcie_ip_pcie_rstn.export
         .pcie_ip_rx_in_rx_datain_0                  (PCIE_RX_P[0]),                  //              pcie_ip_rx_in.rx_datain_0
         .pcie_ip_tx_out_tx_dataout_0                (PCIE_TX_P[0]),                //             pcie_ip_tx_out.tx_dataout_0
-        .led_external_connection_export             (LEDG[3:0]),             //    led_external_connection.export
+        .led_external_connection_export             (pcie_led),             //    led_external_connection.export
         .button_external_connection_export          (KEY),           // button_external_connection.export
 		  .flash_ssram_tri_state_bridge_out_ssram_adsc_n              (SSRAM_ADSC_N), //                           .ssram_adsc_n
 		  .flash_ssram_tri_state_bridge_out_ssram_be_n                (SSRAM_BE),                  // flash_ssram_tri_state_bridge_out.ssram_be
@@ -508,13 +509,11 @@ endless_reader reader(
   
 );
 
-assign FAN_CTRL = SW[17];
 
 
 //assign LEDR[17:0] = reader_length_left[17:0];
 
 SEG7_LUT_8 segs(HEX0,HEX1,HEX2,HEX3,HEX4,HEX5,HEX6,HEX7, {pxl_width[15:0],pxl_height[15:0]});
-assign LEDG[7] = mem_master_user_data_available;
 
 
 //===========================
@@ -527,6 +526,9 @@ wire sys_clk;
 wire feeder_clk;
 wire sys_rst_n;
 wire locked;
+
+wire led_show_pixclk;
+wire led_show_sysclk;
 
 wire scdt_to_overlay;
 wire odck_to_overlay;
@@ -550,11 +552,14 @@ wire pixel_fifo_empty_int;
 
 wire pixel_clk_o;
 
-assign pixel_fifo_data = SW[4] ? pixel_fifo_data_int : pixel_fifo_data_ext;
-assign pixel_fifo_empty = SW[4] ? pixel_fifo_empty_int : pixel_fifo_empty_ext;
+wire sw_test_pattern;
+
+assign pixel_fifo_data = sw_test_pattern ? pixel_fifo_data_int : pixel_fifo_data_ext;
+assign pixel_fifo_empty = sw_test_pattern ? pixel_fifo_empty_int : pixel_fifo_empty_ext;
 
 wire[3:0] i2c_drive_low;
-wire[2:0] unused;
+wire[2:0] led_to_nios;
+wire[3:0] sw_nios;
 
 assign GPIO[34] = i2c_drive_low[2] ? 1'b0 : 1'bz; //I2C master
 assign GPIO[35] = i2c_drive_low[3] ? 1'b0 : 1'bz; //I2C master
@@ -573,8 +578,8 @@ sys_pll sys_pll_1(
 i2c_nios i2c_nios0 (
         .clk_clk       (sys_clk),       //   clk.clk
         .reset_reset_n (sys_rst_n), // reset.reset_n
-		  .p_output_export({unused,GPIO[25],i2c_drive_low}),
-        .p_input_export({4'bzzzz,GPIO[35:32]}),    //  gpio.export
+		  .p_output_export({led_to_nios,GPIO[25],i2c_drive_low}),
+        .p_input_export({sw_nios,GPIO[35:32]}),    //  gpio.export
         .edid_scl      (GPIO[32]),
         .edid_sda       (GPIO[33]),
 		  .lcd_data       (LCD_DATA),
@@ -607,6 +612,10 @@ tfp401a dvi_in_1(
 
 assign scdt_to_overlay = GPIO[29];
 
+wire sw_debug, sw_en_overlay, sw_pattern_pause, sw_blank;
+wire vga_de;
+assign VGA_BLANK_N = vga_de && !sw_blank;
+
 danmaku_overlay overlay_logic_1(
    .rst(sys_rst_n),
 
@@ -620,12 +629,12 @@ danmaku_overlay overlay_logic_1(
    .pixel_b_in(pixel_b_to_overlay),
    .fifoData_in(pixel_fifo_data),
    .fifoRdEmpty(pixel_fifo_empty),
-   .noDebug(SW[0]), 
+   .noDebug(~sw_debug), 
 
    .pixel_clk_o(pixel_clk_o),
    .vsync_o(VGA_VS),
    .hsync_o(VGA_HS),
-   .de_o(VGA_BLANK_N),
+   .de_o(vga_de),
    .pixel_r_o(VGA_R),
    .pixel_g_o(VGA_G),
    .pixel_b_o(VGA_B),
@@ -637,13 +646,13 @@ danmaku_overlay overlay_logic_1(
    .screenPxl(),
   
    .nowX(),
-   .nowY(LEDR[15:0]),
+   .nowY(),
    .nowPxl(),
   
    .ovf(),
    .syncWaitV(),
    
-   .overlay_en(SW[2])
+   .overlay_en(sw_en_overlay)
 
 );
 
@@ -660,25 +669,23 @@ test_img_feeder feeder1(
   .fifoRdreq(pixel_fifo_req),
   .fifoRdempty(pixel_fifo_empty_int),
   
-  .pause(SW[1])
+  .pause(sw_pattern_pause)
 );
 
 led led_sysclk(
     .clk(sys_clk),
     .rst(sys_rst_n),
-    .status_led(LEDG[5])
+    .status_led(led_show_sysclk)
 );
 led led_pixclk(
     .clk(odck_to_overlay),
     .rst(sys_rst_n),
-    .status_led(LEDG[4])
+    .status_led(led_show_pixclk)
 );
 
 assign sys_rst_n = locked;
 
 //assign GPIO[25] = 1'b1; //hpd
-
-assign LEDG[6] = scdt_to_overlay;
 
 // assign VGA_VS = vsync_to_overlay;
 // assign VGA_HS = hsync_to_overlay;
@@ -691,7 +698,15 @@ assign VGA_CLK = ~pixel_clk_o;
 
 assign LCD_ON = 1'b1;
 
-
+assign LEDR[17:0] = {GPIO[35:32],10'b0,led_to_nios,GPIO[25]};
+assign LEDG[7:0] = {mem_master_user_data_available,scdt_to_overlay,led_show_sysclk,led_show_pixclk,pcie_led};
+assign sw_en_overlay = SW[0];
+assign sw_blank = SW[1];
+assign sw_nios = SW[5:2];
+assign sw_debug = SW[14];
+assign sw_pattern_pause = SW[15];
+assign sw_test_pattern = SW[16];
+assign FAN_CTRL = SW[17];
 //===========================
 
 endmodule

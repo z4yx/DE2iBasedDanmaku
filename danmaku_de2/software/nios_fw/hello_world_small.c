@@ -87,14 +87,16 @@
 #include "eeprom.h"
 #include "pin_def.h"
 
-enum{STATE_NO_SCR, STATE_EDID_READ, STATE_EDID_READY, STATE_CONNECTED};
+enum{STATE_NO_SCR, STATE_EDID_READ, STATE_EDID_READY, STATE_CONNECTED, STATE_FORCE_ON};
 const char *STATE_TEXT[] = {
 		[STATE_NO_SCR] = "No Screen",
 		[STATE_EDID_READ] = "Reading EDID...",
 		[STATE_EDID_READY] = "EDID Ready",
-		[STATE_CONNECTED] = "Screen Connected"
+		[STATE_CONNECTED] = "Screen Connected",
+		[STATE_FORCE_ON] = "Forced Screen On"
 };
 
+#define FORCE_SCREEN()  ((READ_INPUT() & PIN_SW_FORCE)!=0)
 
 void hackEDID(uint8_t buf[128])
 {
@@ -180,6 +182,10 @@ int main()
 	while (1){
 		switch(state){
 		case STATE_NO_SCR:
+			if(FORCE_SCREEN()){
+				switch_state(STATE_FORCE_ON);
+				continue;
+			}
 
 			ret = read_eeprom(edid, 128, 0xa0);
 			if(ret < 0){
@@ -212,6 +218,13 @@ int main()
 					|| !verifyChecksum(edid)){
 				CLR_BITS(PIN_HPD);
 				printf("lost screen\n");
+				switch_state(STATE_NO_SCR);
+			}
+			break;
+		case STATE_FORCE_ON:
+			SET_BITS(PIN_HPD);
+			if(!FORCE_SCREEN()){
+				CLR_BITS(PIN_HPD);
 				switch_state(STATE_NO_SCR);
 			}
 			break;
