@@ -1,0 +1,136 @@
+/*
+WARNING: Do NOT edit the input and output ports in this file in a text
+editor if you plan to continue editing the block that represents it in
+the Block Editor! File corruption is VERY likely to occur.
+*/
+/*
+Copyright (C) 1991-2015 Altera Corporation. All rights reserved.
+Your use of Altera Corporation's design tools, logic functions 
+and other software and tools, and its AMPP partner logic 
+functions, and any output files from any of the foregoing 
+(including device programming or simulation files), and any 
+associated documentation or information are expressly subject 
+to the terms and conditions of the Altera Program License 
+Subscription Agreement, the Altera Quartus II License Agreement,
+the Altera MegaCore Function License Agreement, or other 
+applicable license agreement, including, without limitation, 
+that your use is for the sole purpose of programming logic 
+devices manufactured by Altera and sold by Altera or its 
+authorized distributors.  Please refer to the applicable 
+agreement for further details.
+*/
+(header "symbol" (version "1.1"))
+(symbol
+	(rect 0 0 288 368)
+	(text "i2c_nios" (rect 120 -1 151 11)(font "Arial" (font_size 10)))
+	(text "inst" (rect 8 352 20 364)(font "Arial" ))
+	(port
+		(pt 0 72)
+		(input)
+		(text "clk_clk" (rect 0 0 27 12)(font "Arial" (font_size 8)))
+		(text "clk_clk" (rect 4 61 46 72)(font "Arial" (font_size 8)))
+		(line (pt 0 72)(pt 112 72)(line_width 1))
+	)
+	(port
+		(pt 0 256)
+		(input)
+		(text "p_input_export[7..0]" (rect 0 0 79 12)(font "Arial" (font_size 8)))
+		(text "p_input_export[7..0]" (rect 4 245 124 256)(font "Arial" (font_size 8)))
+		(line (pt 0 256)(pt 112 256)(line_width 3))
+	)
+	(port
+		(pt 0 336)
+		(input)
+		(text "reset_reset_n" (rect 0 0 56 12)(font "Arial" (font_size 8)))
+		(text "reset_reset_n" (rect 4 325 82 336)(font "Arial" (font_size 8)))
+		(line (pt 0 336)(pt 112 336)(line_width 1))
+	)
+	(port
+		(pt 0 168)
+		(output)
+		(text "lcd_RS" (rect 0 0 30 12)(font "Arial" (font_size 8)))
+		(text "lcd_RS" (rect 4 157 40 168)(font "Arial" (font_size 8)))
+		(line (pt 0 168)(pt 112 168)(line_width 1))
+	)
+	(port
+		(pt 0 184)
+		(output)
+		(text "lcd_RW" (rect 0 0 35 12)(font "Arial" (font_size 8)))
+		(text "lcd_RW" (rect 4 173 40 184)(font "Arial" (font_size 8)))
+		(line (pt 0 184)(pt 112 184)(line_width 1))
+	)
+	(port
+		(pt 0 216)
+		(output)
+		(text "lcd_E" (rect 0 0 23 12)(font "Arial" (font_size 8)))
+		(text "lcd_E" (rect 4 205 34 216)(font "Arial" (font_size 8)))
+		(line (pt 0 216)(pt 112 216)(line_width 1))
+	)
+	(port
+		(pt 0 296)
+		(output)
+		(text "p_output_export[7..0]" (rect 0 0 84 12)(font "Arial" (font_size 8)))
+		(text "p_output_export[7..0]" (rect 4 285 130 296)(font "Arial" (font_size 8)))
+		(line (pt 0 296)(pt 112 296)(line_width 3))
+	)
+	(port
+		(pt 0 112)
+		(bidir)
+		(text "edid_scl" (rect 0 0 31 12)(font "Arial" (font_size 8)))
+		(text "edid_scl" (rect 4 101 52 112)(font "Arial" (font_size 8)))
+		(line (pt 0 112)(pt 112 112)(line_width 1))
+	)
+	(port
+		(pt 0 128)
+		(bidir)
+		(text "edid_sda" (rect 0 0 35 12)(font "Arial" (font_size 8)))
+		(text "edid_sda" (rect 4 117 52 128)(font "Arial" (font_size 8)))
+		(line (pt 0 128)(pt 112 128)(line_width 1))
+	)
+	(port
+		(pt 0 200)
+		(bidir)
+		(text "lcd_data[7..0]" (rect 0 0 53 12)(font "Arial" (font_size 8)))
+		(text "lcd_data[7..0]" (rect 4 189 88 200)(font "Arial" (font_size 8)))
+		(line (pt 0 200)(pt 112 200)(line_width 3))
+	)
+	(drawing
+		(text "clk" (rect 97 43 212 99)(font "Arial" (color 128 0 0)(font_size 9)))
+		(text "clk" (rect 117 67 252 144)(font "Arial" (color 0 0 0)))
+		(text "edid" (rect 89 83 202 179)(font "Arial" (color 128 0 0)(font_size 9)))
+		(text "scl" (rect 117 107 252 224)(font "Arial" (color 0 0 0)))
+		(text "sda" (rect 117 123 252 256)(font "Arial" (color 0 0 0)))
+		(text "lcd" (rect 97 139 212 291)(font "Arial" (color 128 0 0)(font_size 9)))
+		(text "RS" (rect 117 163 246 336)(font "Arial" (color 0 0 0)))
+		(text "RW" (rect 117 179 246 368)(font "Arial" (color 0 0 0)))
+		(text "data" (rect 117 195 258 400)(font "Arial" (color 0 0 0)))
+		(text "E" (rect 117 211 240 432)(font "Arial" (color 0 0 0)))
+		(text "p_input" (rect 70 227 182 467)(font "Arial" (color 128 0 0)(font_size 9)))
+		(text "export" (rect 117 251 270 512)(font "Arial" (color 0 0 0)))
+		(text "p_output" (rect 62 267 172 547)(font "Arial" (color 128 0 0)(font_size 9)))
+		(text "export" (rect 117 291 270 592)(font "Arial" (color 0 0 0)))
+		(text "reset" (rect 83 307 196 627)(font "Arial" (color 128 0 0)(font_size 9)))
+		(text "reset_n" (rect 117 331 276 672)(font "Arial" (color 0 0 0)))
+		(text " i2c_nios " (rect 250 352 560 714)(font "Arial" ))
+		(line (pt 112 32)(pt 176 32)(line_width 1))
+		(line (pt 176 32)(pt 176 352)(line_width 1))
+		(line (pt 112 352)(pt 176 352)(line_width 1))
+		(line (pt 112 32)(pt 112 352)(line_width 1))
+		(line (pt 113 52)(pt 113 76)(line_width 1))
+		(line (pt 114 52)(pt 114 76)(line_width 1))
+		(line (pt 113 92)(pt 113 132)(line_width 1))
+		(line (pt 114 92)(pt 114 132)(line_width 1))
+		(line (pt 113 148)(pt 113 220)(line_width 1))
+		(line (pt 114 148)(pt 114 220)(line_width 1))
+		(line (pt 113 236)(pt 113 260)(line_width 1))
+		(line (pt 114 236)(pt 114 260)(line_width 1))
+		(line (pt 113 276)(pt 113 300)(line_width 1))
+		(line (pt 114 276)(pt 114 300)(line_width 1))
+		(line (pt 113 316)(pt 113 340)(line_width 1))
+		(line (pt 114 316)(pt 114 340)(line_width 1))
+		(line (pt 0 0)(pt 288 0)(line_width 1))
+		(line (pt 288 0)(pt 288 368)(line_width 1))
+		(line (pt 0 368)(pt 288 368)(line_width 1))
+		(line (pt 0 0)(pt 0 368)(line_width 1))
+	)
+)

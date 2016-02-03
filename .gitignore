@@ -9,7 +9,6 @@ incremental_db
 *.pin
 *.map
 *.jic
-danmaku_de2/i2c_nios/synthesis/
 *.sopcinfo
 *.flash
 *.hex
