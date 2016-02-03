@@ -21,7 +21,7 @@ module danmaku_overlay(
   input wire[7:0] pixel_b_in,
   input wire[31:0] fifoData_in,
   input wire fifoRdEmpty,
-  input wire noDebug, 
+  input wire noDebug,
 
   output wire pixel_clk_o,
   output reg vsync_o,
@@ -36,14 +36,14 @@ module danmaku_overlay(
   output wire [15:0] screenX,
   output wire [15:0] screenY,
   output wire [31:0] screenPxl,
-  
+
   output wire [15:0] nowX,
   output wire [15:0] nowY,
   output wire [31:0] nowPxl,
-  
+
   output wire ovf,
   output wire syncWaitV,
-  
+
   input wire overlay_en
 
 );
@@ -66,9 +66,14 @@ wire ovf;
 assign pixel_clk_o=odck_in;
 assign fifoRdclk = odck_in;
 assign syncWait = syncWaitH || syncWaitV;
-assign {pixel_r_o, pixel_g_o, pixel_b_o} = (fifoData_in[7]==1'b0 || syncWait || !overlay_en)? 
-                                           {(fifoRdEmpty && !noDebug)? ~pixel_r_orig : pixel_r_orig, pixel_g_orig, (syncWait && !noDebug) ? ~pixel_b_orig :  pixel_b_orig}:
-                                           fifoData_in[31:8];
+assign {pixel_r_o, pixel_g_o, pixel_b_o} =
+  (fifoData_in[7]==1'b0 || syncWait || !overlay_en)?
+    {
+      (fifoRdEmpty && !noDebug)? ~pixel_r_orig : pixel_r_orig,
+      pixel_g_orig,
+      (syncWait && !noDebug) ? ~pixel_b_orig :  pixel_b_orig
+    }:
+    fifoData_in[31:8];
 
 assign syncWaitH = fifoData_in[1:0] == 2'h01;
 assign syncWaitV = fifoData_in[1:0] == 2'h02;
@@ -96,7 +101,7 @@ pxlCounter pxlCounter_inst(
 reg vsync_t, hsync_t, de_t;
 reg[7:0] pixel_r_orig_t;
 reg[7:0] pixel_g_orig_t;
-reg[7:0] pixel_b_orig_t; 
+reg[7:0] pixel_b_orig_t;
 
 always @(posedge odck_in or negedge rst) begin
 
